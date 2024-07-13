@@ -33,98 +33,7 @@ function Compose() {
       setLoading(false); // Set loading state to false when myFunction is done
     }, 200); // Adjust the delay as needed
   };*/
-
-  const basicPitch = async (recorderBlob,recordedTempo) => {
-    setLoading(true); 
-
-    const formData = new FormData();
-    formData.append('file', recorderBlob, 'recording.wav'); // 'file' is the key that Flask will expect
-
-    const token = window.localStorage.getItem("token");
-
-    try {
-      const response = await axios.post(window.serverLink+'/basicpitch', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        params: {
-          token: token,
-          tempo: recordedTempo
-        }
-      });
-      setLoading(false); 
-      return response.data;
-    } catch (error) {
-      console.error('Error uploading files:', error);
-    }
-  };
-
-  const generate = async (trackName,loop) => {
-    setLoading(true); 
-
-    const token = window.localStorage.getItem("token");
-
-    try {
-      const response = await axios.post(window.serverLink+'/generate', loop, {
-        params: {
-          token: token,
-          trackName: trackName
-        },
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      setLoading(false); 
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.error('Error generating:', error);
-    }
-  };
-
-  const saveSession = async (session) => {
-
-    const token = window.localStorage.getItem("token");
-
-    try {
-      const response = await axios.post(window.serverLink+'/save', session, {
-        params: {
-          token: token
-        },
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error saving session:', error);
-    }
-  };
-
-  const getToken = async () => {
-    try {
-
-      const token = window.localStorage.getItem("token");
-      let msg;
-
-      if (!token) msg = "New user";
-      else msg = token;
-
-      const response = await axios.get(window.serverLink+"/getToken", {
-        params: {
-          message: msg
-        }
-      });
-
-      if (response.data.message === "Your session expired") window.localStorage.removeItem("token");
-      console.log(response.data);
-      window.localStorage.setItem("token", response.data.token);
-
-    } catch (error) {
-      console.error('Error getting token:', error);
-    }
-  };
-
+  
   const loadSession = async () => {
     setLoading(true); 
     try {
@@ -153,7 +62,6 @@ function Compose() {
 
   useEffect(() => {
     setIsMobileDevice(isMobile);
-    if (isMobile === false) getToken();
   }, [isMobileDevice]); 
 
   /*useEffect(() => {
@@ -165,7 +73,7 @@ function Compose() {
   useEffect(() => {
 
     if (!loading && !p5InstanceRef.current) {
-      p5InstanceRef.current = new p5(sketch(generate,saveSession,setLoading,basicPitch), p5ContainerRef.current);
+      p5InstanceRef.current = new p5(sketch(setLoading), p5ContainerRef.current);
     }
 
   }, []); // Only run this effect when loading changes
