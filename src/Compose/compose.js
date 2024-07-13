@@ -5962,6 +5962,17 @@ const sketch = (setLoading) => (p) => {
   }
 
   // --------------------------------------------------------------------------------------
+
+  p.preload = function () {
+    fontLight = p.loadFont(poppinsLightFont);
+    fontMedium = p.loadFont(poppinsMediumFont);
+    petal1 = p.loadModel(petalOBJ1);
+    petal2 = p.loadModel(petalOBJ2);
+    petal3 = p.loadModel(petalOBJ3);
+    petal4 = p.loadModel(petalOBJ4);
+  }
+
+  // --------------------------------------------------------------------------------------
   p.setup = function () {
 
     loopsIcon = p.loadImage(loopsPNG);
@@ -5984,15 +5995,6 @@ const sketch = (setLoading) => (p) => {
     diceIcons.push(p.loadImage(dice4PNG));
     diceIcons.push(p.loadImage(dice5PNG));
     diceIcons.push(p.loadImage(dice6PNG));
-
-    petal1 = p.loadModel(petalOBJ1);
-    petal2 = p.loadModel(petalOBJ2);
-    petal3 = p.loadModel(petalOBJ3);
-    petal4 = p.loadModel(petalOBJ4);
-
-    fontLight = p.loadFont(poppinsLightFont);
-    fontMedium = p.loadFont(poppinsMediumFont);
-    fontBold = p.loadFont(poppinsBoldFont);
 
     let cnv = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
     p.frameRate(60);
