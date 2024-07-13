@@ -5966,14 +5966,14 @@ const sketch = (setLoading) => (p) => {
   p.preload = function () {
     fontLight = p.loadFont(poppinsLightFont);
     fontMedium = p.loadFont(poppinsMediumFont);
-    petal1 = p.loadModel(petalOBJ1);
-    petal2 = p.loadModel(petalOBJ2);
-    petal3 = p.loadModel(petalOBJ3);
-    petal4 = p.loadModel(petalOBJ4);
   }
 
   // --------------------------------------------------------------------------------------
   p.setup = function () {
+    petal1 = p.loadModel(petalOBJ1);
+    petal2 = p.loadModel(petalOBJ2);
+    petal3 = p.loadModel(petalOBJ3);
+    petal4 = p.loadModel(petalOBJ4);
 
     loopsIcon = p.loadImage(loopsPNG);
     structsIcon = p.loadImage(structsPNG);
