@@ -5962,7 +5962,8 @@ const sketch = (setLoading) => (p) => {
   }
 
   // --------------------------------------------------------------------------------------
-  p.preload = function () {
+  p.setup = function () {
+
     loopsIcon = p.loadImage(loopsPNG);
     structsIcon = p.loadImage(structsPNG);
     gridIcon = p.loadImage(gridPNG);
@@ -5992,10 +5993,7 @@ const sketch = (setLoading) => (p) => {
     fontLight = p.loadFont(poppinsLightFont);
     fontMedium = p.loadFont(poppinsMediumFont);
     fontBold = p.loadFont(poppinsBoldFont);
-  }
 
-  // --------------------------------------------------------------------------------------
-  p.setup = function () {
     let cnv = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
     p.frameRate(60);
     p.imageMode(p.CENTER);
